@@ -19,7 +19,7 @@ The goal of this project is to build a predictive model that can accurately clas
 - **Data Manipulation:** Pandas, NumPy
 - **Visualization:** Seaborn, Matplotlib (v3.x compatible)
 - **Machine Learning:** Scikit-Learn (Sklearn)
-- **Environment:** Jupyter Notebook / Google Colab
+- **Environment:** Google Colab / Jupyter Notebook
 
 ## 📂 Dataset
 
@@ -73,33 +73,6 @@ During development, the following specific technical issues were resolved:
 
 1. **Seaborn Syntax Update:** Fixed `TypeError` in `sns.lineplot` by strictly defining `x` and `y` arguments (required in Seaborn v0.12+).
 2. **GridSearch Range:** Adjusted `n_neighbors` search space to ensure it did not exceed the sample size available in Cross-Validation folds.
-
-## 🚀 How to Run
-
-1. Clone the repository:
-
-    ```bash
-    git clone [https://github.com/yourusername/diabetes-prediction-knn.git](https://github.com/yourusername/diabetes-prediction-knn.git)
-    ```
-
-2. Install dependencies:
-
-    ```bash
-    pip install pandas numpy matplotlib seaborn scikit-learn
-    ```
-
-3. Run the notebook:
-
-    ```bash
-    jupyter notebook Diabetes_Prediction.ipynb
-    ```
-
-## 🤝 Contributing
-
-Feel free to fork this project and submit Pull Requests. Future improvements could include:
-
-- Testing **Random Forest** or **XGBoost** models for better accuracy.
-- Deploying the model using **Streamlit**.
 
 ## 📜
 
