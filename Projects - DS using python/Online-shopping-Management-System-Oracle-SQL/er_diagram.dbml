@@ -1,0 +1,41 @@
+Table customers {
+  customer_id number [pk]
+  name varchar
+  email varchar
+  phone varchar
+  city varchar
+}
+
+Table categories {
+  category_id number [pk]
+  category_name varchar
+}
+
+Table products {
+  product_id number [pk]
+  product_name varchar
+  price number
+  category_id number [ref: > categories.category_id]
+}
+
+Table orders {
+  order_id number [pk]
+  customer_id number [ref: > customers.customer_id]
+  order_date date
+  status varchar
+}
+
+Table order_items {
+  order_item_id number [pk]
+  order_id number [ref: > orders.order_id]
+  product_id number [ref: > products.product_id]
+  quantity number
+}
+
+Table payments {
+  payment_id number [pk]
+  order_id number [ref: > orders.order_id]
+  payment_date date
+  amount number
+  payment_mode varchar
+}

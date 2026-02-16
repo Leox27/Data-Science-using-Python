@@ -1,0 +1,523 @@
+SQL> --ANALYTICS QUERIES--
+SQL> SELECT table_name FROM user_tables;
+
+TABLE_NAME
+------------------------------
+CUSTOMERS
+CATEGORIES
+PRODUCTS
+ORDERS
+ORDER_ITEMS
+PAYMENTS
+
+6 rows selected.
+
+SQL> SET LINES 5000 PAGES 5000
+SQL> SELECT * FROM CUSTOMERS;
+
+CUSTOMER_ID NAME                                               EMAIL                                                       PHONE            CITY
+----------- -------------------------------------------------- ---------------------------------------------------------------------------------------------------- --------------- --------------------------------------------------
+          1 Amit                                               amit@gmail.com                                              9876543210       Hyderabad
+          2 Riya                                               riya@gmail.com                                              9123456780       Bangalore
+          3 Aditya Kulkarni                                    aditya.k@gmail.com                                          810000001        Pune
+          4 Bhavana Rao                                        bhavana.r@gmail.com                                         810000002        Mysore
+          5 Chirag Shah                                        chirag.s@gmail.com                                          810000003        Surat
+          6 Diksha More                                        diksha.m@gmail.com                                          810000004        Kolhapur
+          7 Eshan Banerjee                                     eshan.b@gmail.com                                           810000005        Howrah
+          8 Farhan Ali                                         farhan.a@gmail.com                                          810000006        Aligarh
+          9 Gauri Deshpande                                    gauri.d@gmail.com                                           810000007        Satara
+         10 Himanshu Tiwari                                    himanshu.t@gmail.com                                        810000008        Rewa
+         11 Ishita Sengupta                                    ishita.s@gmail.com                                          810000009        Durgapur
+         12 Jayant Pawar                                       jayant.p@gmail.com                                          810000010        Solapur
+         13 Kritika Arora                                      kritika.a@gmail.com                                         810000011        Panipat
+         14 Lakshay Bansal                                     lakshay.b@gmail.com                                         810000012        Sirsa
+         15 Mohit Rawat                                        mohit.r@gmail.com                                           810000013        Haldwani
+         16 Nandini Kulkarni                                   nandini.k@gmail.com                                         810000014        Ratnagiri
+         17 Omkar Joshi                                        omkar.j@gmail.com                                           810000015        Alibaug
+         18 Pranav Kulkarni                                    pranav.k@gmail.com                                          810000016        Baramati
+         19 Quazi Rahman                                       quazi.r@gmail.com                                           810000017        Murshidabad
+         20 Rachana Patil                                      rachana.p@gmail.com                                         810000018        Jalgaon
+         21 Sanket Jadhav                                      sanket.j@gmail.com                                          810000019        Latur
+         22 Tanmay Kulkarni                                    tanmay.k@gmail.com                                          810000020        Sangli
+         23 Utkarsh Mishra                                     utkarsh.m@gmail.com                                         810000021        Prayagraj
+         24 Vaishali Patankar                                  vaishali.p@gmail.com                                        810000022        Chiplun
+         25 Wasim Khan                                         wasim.k@gmail.com                                           810000023        Malegaon
+         26 Xavier Dsouza                                      xavier.d@gmail.com                                          810000024        Vasai
+         27 Yashwant Solanki                                   yashwant.s@gmail.com                                        810000025        Ujjain
+         28 Zoya Siddiqui                                      zoya.s@gmail.com                                            810000026        Rampur
+         29 Aarav Mehra                                        aarav.m@gmail.com                                           810000027        Rohtak
+         30 Bhuvan Malhotra                                    bhuvan.m@gmail.com                                          810000028        Sonipat
+         31 Charu Negi                                         charu.n@gmail.com                                           810000029        Tehri
+         32 Devansh Tripathi                                   devansh.t@gmail.com                                         810000030        Faizabad
+
+32 rows selected.
+
+SQL> SELECT * FROM CATEGORIES;
+
+CATEGORY_ID CATEGORY_NAME
+----------- --------------------------------------------------
+          1 Electronics
+          2 Clothing
+          3 Women Wear
+          4 Kitchen Utilities
+          5 Academic Books
+
+SQL> SELECT * FROM PRODUCTS;
+
+PRODUCT_ID PRODUCT_NAME                                                                                              PRICE CATEGORY_ID
+---------- ---------------------------------------------------------------------------------------------------- ---------- -----------
+         1 Laptop                                                                                                    60000           1
+         2 T-Shirt                                                                                                    1200           2
+         3 Android Smartphone                                                                                        28000           1
+         4 Bluetooth Speaker                                                                                          4500           1
+         5 Smart Fitness Band                                                                                         6500           1
+         6 Formal Shirt                                                                                               2200           2
+         7 Cotton Trousers                                                                                            2600           2
+         8 Kurti Set                                                                                                  3400           3
+         9 Women Jacket                                                                                               4800           3
+        10 Induction Stove                                                                                           31000           4
+        11 Mixer Grinder                                                                                              7200           4
+        12 Database Systems Book                                                                                       950           5
+
+12 rows selected.
+
+SQL> SELECT * FROM ORDERS;
+
+  ORDER_ID CUSTOMER_ID ORDER_DAT STATUS
+---------- ----------- --------- --------------------
+      1001           1 08-FEB-26 PLACED
+      1002           2 08-FEB-26 DELIVERED
+      1003           3 08-FEB-26 DELIVERED
+      1004           7 08-FEB-26 PLACED
+      1005          12 08-FEB-26 DELIVERED
+      1006          18 08-FEB-26 DELIVERED
+      1007          25 08-FEB-26 PLACED
+      1008           3 08-FEB-26 DELIVERED
+      1009          10 08-FEB-26 CANCELLED
+      1010          20 08-FEB-26 DELIVERED
+      1011          28 08-FEB-26 PLACED
+      1012          30 08-FEB-26 DELIVERED
+
+12 rows selected.
+
+SQL> SELECT * FROM ORDER_ITEMS;
+
+ORDER_ITEM_ID   ORDER_ID PRODUCT_ID   QUANTITY
+------------- ---------- ---------- ----------
+            1       1001          1          1
+            2       1002          2          2
+            3       1006          1          1
+            4       1006          3          1
+            5       1007          4          2
+            6       1008          6          1
+            7       1009          9          1
+            8       1010         10          2
+
+8 rows selected.
+
+SQL> SELECT * FROM PAYMENTS;
+
+PAYMENT_ID   ORDER_ID PAYMENT_D     AMOUNT PAYMENT_MODE
+---------- ---------- --------- ---------- --------------------
+         1       1001 08-FEB-26      60000 CARD
+         2       1002 08-FEB-26       2400 UPI
+         3       1006 08-FEB-26      34500 CARD
+         4       1008 08-FEB-26       3400 UPI
+         5       1009 08-FEB-26       7200 NETBANKING
+         6       1010 08-FEB-26       1900 CARD
+
+6 rows selected.
+
+SQL> --1. Customer and their orders.
+SQL>
+SQL> --JOINS--
+SQL> --1. WAQTD CUSTOMER NAME AND ORDER ID FOR ALL CUSTOMERS WHO PLACED ORDERS.
+SQL> SELECT C.NAME, O.ORDER_ID
+  2  FROM CUSTOMERS C
+  3  INNER JOIN ORDERS O
+  4  ON C.CUSTOMER_ID = O.CUSTOMER_ID;
+
+NAME                                                 ORDER_ID
+-------------------------------------------------- ----------
+Amit                                                     1001
+Riya                                                     1002
+Aditya Kulkarni                                          1008
+Aditya Kulkarni                                          1003
+Eshan Banerjee                                           1004
+Himanshu Tiwari                                          1009
+Jayant Pawar                                             1005
+Pranav Kulkarni                                          1006
+Rachana Patil                                            1010
+Wasim Khan                                               1007
+Zoya Siddiqui                                            1011
+Bhuvan Malhotra                                          1012
+
+12 rows selected.
+
+SQL> --2. WAQTD PRODUCT NAME AND CATEGORY NAME.
+SQL> SELECT P.PRODUCT_NAME, C.CATEGORY_NAME
+  2  FROM PRODUCTS P
+  3  INNER JOIN CATEGORIES C
+  4  ON P.CATEGORY_ID = C.CATEGORY_ID;
+
+PRODUCT_NAME                                                                                         CATEGORY_NAME
+---------------------------------------------------------------------------------------------------- --------------------------------------------------
+Laptop                                                                                               Electronics
+T-Shirt                                                                                              Clothing
+Android Smartphone                                                                                   Electronics
+Bluetooth Speaker                                                                                    Electronics
+Smart Fitness Band                                                                                   Electronics
+Formal Shirt                                                                                         Clothing
+Cotton Trousers                                                                                      Clothing
+Kurti Set                                                                                            Women Wear
+Women Jacket                                                                                         Women Wear
+Induction Stove                                                                                      Kitchen Utilities
+Mixer Grinder                                                                                        Kitchen Utilities
+Database Systems Book                                                                                Academic Books
+
+12 rows selected.
+
+SQL> --LEFT OUTER JOIN--
+SQL> --3. WAQTD CUSTOMER NAME AND ORDER ID INCLUDING CUSTOMERS WITHOUT ORDERS.
+SQL> SELECT C.NAME, O.ORDER_ID
+  2  FROM CUSTOMERS C
+  3  LEFT JOIN ORDERS O
+  4  ON C.CUSTOMER_ID = O.CUSTOMER_ID;
+
+NAME                                                 ORDER_ID
+-------------------------------------------------- ----------
+Amit                                                     1001
+Riya                                                     1002
+Aditya Kulkarni                                          1003
+Eshan Banerjee                                           1004
+Jayant Pawar                                             1005
+Pranav Kulkarni                                          1006
+Wasim Khan                                               1007
+Aditya Kulkarni                                          1008
+Himanshu Tiwari                                          1009
+Rachana Patil                                            1010
+Zoya Siddiqui                                            1011
+Bhuvan Malhotra                                          1012
+Xavier Dsouza
+Mohit Rawat
+Sanket Jadhav
+Bhavana Rao
+Utkarsh Mishra
+Vaishali Patankar
+Charu Negi
+Chirag Shah
+Farhan Ali
+Quazi Rahman
+Devansh Tripathi
+Omkar Joshi
+Lakshay Bansal
+Nandini Kulkarni
+Gauri Deshpande
+Kritika Arora
+Tanmay Kulkarni
+Ishita Sengupta
+Diksha More
+Aarav Mehra
+Yashwant Solanki
+
+33 rows selected.
+
+SQL> --4. WAQTD ORDERS WHICH DO NOT HAVE PAYMENTS.
+SQL> SELECT O.ORDER_ID
+  2  FROM ORDERS O
+  3  LEFT JOIN PAYMENTS P
+  4  ON O.ORDER_ID = P.ORDER_ID
+  5  WHERE P.PAYMENT_ID IS NULL;
+
+  ORDER_ID
+----------
+      1005
+      1007
+      1004
+      1003
+      1011
+      1012
+
+6 rows selected.
+
+SQL> --RIGHT OUTER JOIN--
+SQL> --5. WAQTD ALL PRODUCTS AND THEIR ORDER QUANTITY (INCLUDING UNSOLD PRODUCTS).
+SQL> SELECT P.PRODUCT_NAME, OI.QUANTITY
+  2  FROM ORDER_ITEMS OI
+  3  RIGHT JOIN PRODUCTS P
+  4  ON OI.PRODUCT_ID = P.PRODUCT_ID;
+
+PRODUCT_NAME                                                                                           QUANTITY
+---------------------------------------------------------------------------------------------------- ----------
+Laptop                                                                                                        1
+T-Shirt                                                                                                       2
+Laptop                                                                                                        1
+Android Smartphone                                                                                            1
+Bluetooth Speaker                                                                                             2
+Formal Shirt                                                                                                  1
+Women Jacket                                                                                                  1
+Induction Stove                                                                                               2
+Smart Fitness Band
+Kurti Set
+Database Systems Book
+Mixer Grinder
+Cotton Trousers
+
+13 rows selected.
+
+SQL> --MULTIPLE JOINS--
+SQL> 6. WAQTD CUSTOMER NAME, PRODUCT NAME AND QUANTITY.
+SP2-0734: unknown command beginning "6. WAQTD C..." - rest of line ignored.
+SQL> --6. WAQTD CUSTOMER NAME, PRODUCT NAME AND QUANTITY.
+SQL> SELECT C.NAME, P.PRODUCT_NAME, OI.QUANTITY
+  2  FROM CUSTOMERS C
+  3  JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
+  4  JOIN ORDER_ITEMS OI ON O.ORDER_ID = OI.ORDER_ID
+  5  JOIN PRODUCTS P ON OI.PRODUCT_ID = P.PRODUCT_ID;
+
+NAME                                               PRODUCT_NAME                                                                                           QUANTITY
+-------------------------------------------------- ---------------------------------------------------------------------------------------------------- ----------
+Amit                                               Laptop                                                                                                   1
+Riya                                               T-Shirt                                                                                                  2
+Aditya Kulkarni                                    Formal Shirt                                                                                             1
+Himanshu Tiwari                                    Women Jacket                                                                                             1
+Pranav Kulkarni                                    Android Smartphone                                                                                       1
+Pranav Kulkarni                                    Laptop                                                                                                   1
+Rachana Patil                                      Induction Stove                                                                                          2
+Wasim Khan                                         Bluetooth Speaker                                                                                        2
+
+8 rows selected.
+
+SQL> --7. WAQTD CUSTOMER NAME, ORDER ID AND PAYMENT AMOUNT.
+SQL> SELECT C.NAME, O.ORDER_ID, P.AMOUNT
+  2  FROM CUSTOMERS C
+  3  JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
+  4  JOIN PAYMENTS P ON O.ORDER_ID = P.ORDER_ID;
+
+NAME                                                 ORDER_ID     AMOUNT
+-------------------------------------------------- ---------- ----------
+Amit                                                     1001      60000
+Riya                                                     1002       2400
+Aditya Kulkarni                                          1008       3400
+Himanshu Tiwari                                          1009       7200
+Pranav Kulkarni                                          1006      34500
+Rachana Patil                                            1010       1900
+
+6 rows selected.
+
+SQL> --JOIN WITH CONDITIONS--
+SQL> --8. WAQTD CUSTOMER NAME AND ORDER ID WHERE ORDER STATUS IS DELIVERED.
+SQL> SELECT C.NAME, O.ORDER_ID
+  2  FROM CUSTOMERS C
+  3  JOIN ORDERS O
+  4  ON C.CUSTOMER_ID = O.CUSTOMER_ID
+  5  WHERE O.STATUS = 'DELIVERED';
+
+NAME                                                 ORDER_ID
+-------------------------------------------------- ----------
+Riya                                                     1002
+Aditya Kulkarni                                          1008
+Aditya Kulkarni                                          1003
+Jayant Pawar                                             1005
+Pranav Kulkarni                                          1006
+Rachana Patil                                            1010
+Bhuvan Malhotra                                          1012
+
+7 rows selected.
+
+SQL> --9. WAQTD PRODUCT NAME AND CATEGORY NAME WHERE PRODUCT PRICE > 5000.
+SQL> SELECT P.PRODUCT_NAME, C.CATEGORY_NAME
+  2  FROM PRODUCTS P
+  3  JOIN CATEGORIES C
+  4  ON P.CATEGORY_ID = C.CATEGORY_ID
+  5  WHERE P.PRICE > 5000;
+
+PRODUCT_NAME                                                                                         CATEGORY_NAME
+---------------------------------------------------------------------------------------------------- --------------------------------------------------
+Smart Fitness Band                                                                                   Electronics
+Android Smartphone                                                                                   Electronics
+Laptop                                                                                               Electronics
+Mixer Grinder                                                                                        Kitchen Utilities
+Induction Stove                                                                                      Kitchen Utilities
+
+SQL> --SELF-JOIN--
+SQL> --10. WAQTD CUSTOMERS FROM SAME CITY.
+SQL> SELECT A.NAME, B.NAME, A.CITY
+  2  FROM CUSTOMERS A
+  3  JOIN CUSTOMERS B
+  4  ON A.CITY = B.CITY
+  5  AND A.CUSTOMER_ID <> B.CUSTOMER_ID;
+
+no rows selected
+
+SQL> ---SUBQUERIES---
+SQL> --1. WAQTD CUSTOMER NAMES WHO PLACED AT LEAST ONE ORDER.
+SQL> SELECT NAME
+  2  FROM CUSTOMERS
+  3  WHERE CUSTOMER_ID IN
+  4  (SELECT CUSTOMER_ID FROM ORDERS);
+
+NAME
+--------------------------------------------------
+Amit
+Riya
+Aditya Kulkarni
+Eshan Banerjee
+Jayant Pawar
+Pranav Kulkarni
+Wasim Khan
+Himanshu Tiwari
+Rachana Patil
+Zoya Siddiqui
+Bhuvan Malhotra
+
+11 rows selected.
+
+SQL> --2. WAQTD CUSTOMERS WHO DID NOT PLACE ANY ORDER.
+SQL> SELECT NAME
+  2  FROM CUSTOMERS
+  3  WHERE CUSTOMER_ID NOT IN
+  4  (SELECT CUSTOMER_ID FROM ORDERS);
+
+NAME
+--------------------------------------------------
+Xavier Dsouza
+Mohit Rawat
+Sanket Jadhav
+Bhavana Rao
+Utkarsh Mishra
+Vaishali Patankar
+Charu Negi
+Chirag Shah
+Farhan Ali
+Quazi Rahman
+Devansh Tripathi
+Omkar Joshi
+Lakshay Bansal
+Nandini Kulkarni
+Gauri Deshpande
+Kritika Arora
+Tanmay Kulkarni
+Ishita Sengupta
+Diksha More
+Aarav Mehra
+Yashwant Solanki
+
+21 rows selected.
+
+SQL> --3. WAQTD PRODUCT NAMES COSTLIER THAN AVERAGE PRODUCT PRICE.
+SQL> SELECT PRODUCT_NAME
+  2  FROM PRODUCTS
+  3  WHERE PRICE >
+  4  (SELECT AVG(PRICE) FROM PRODUCTS);
+
+PRODUCT_NAME
+----------------------------------------------------------------------------------------------------
+Laptop
+Android Smartphone
+Induction Stove
+
+SQL> --4. WAQTD ORDER IDS WHICH HAVE PAYMENTS.
+SQL> SELECT ORDER_ID
+  2  FROM ORDERS
+  3  WHERE ORDER_ID IN
+  4  (SELECT ORDER_ID FROM PAYMENTS);
+
+  ORDER_ID
+----------
+      1001
+      1002
+      1006
+      1008
+      1009
+      1010
+
+6 rows selected.
+
+SQL> --5. WAQTD CUSTOMER NAMES WHO SPENT MORE THAN AVERAGE PAYMENT AMOUNT.
+SQL> SELECT NAME
+  2  FROM CUSTOMERS
+  3  WHERE CUSTOMER_ID IN (
+  4      SELECT O.CUSTOMER_ID
+  5      FROM ORDERS O
+  6      JOIN PAYMENTS P ON O.ORDER_ID = P.ORDER_ID
+  7      GROUP BY O.CUSTOMER_ID
+  8      HAVING SUM(P.AMOUNT) >
+  9            (SELECT AVG(AMOUNT) FROM PAYMENTS)
+ 10  );
+
+NAME
+--------------------------------------------------
+Amit
+Pranav Kulkarni
+
+SQL> ---GROUP BY / HAVING / ORDER BY---
+SQL> --1. WAQTD TOTAL NUMBER OF ORDERS PLACED BY EACH CUSTOMER.
+SQL> SELECT CUSTOMER_ID, COUNT(*) TOTAL_ORDERS
+  2  FROM ORDERS
+  3  GROUP BY CUSTOMER_ID;
+
+CUSTOMER_ID TOTAL_ORDERS
+----------- ------------
+          1            1
+         25            1
+         30            1
+         28            1
+          2            1
+         20            1
+          3            2
+          7            1
+         18            1
+         12            1
+         10            1
+
+11 rows selected.
+
+SQL> --2. WAQTD TOTAL PAYMENT AMOUNT FOR EACH ORDER.
+SQL> SELECT ORDER_ID, SUM(AMOUNT) TOTAL_AMOUNT
+  2  FROM PAYMENTS
+  3  GROUP BY ORDER_ID;
+
+  ORDER_ID TOTAL_AMOUNT
+---------- ------------
+      1009         7200
+      1006        34500
+      1001        60000
+      1002         2400
+      1010         1900
+      1008         3400
+
+6 rows selected.
+
+SQL> --3. WAQTD CUSTOMERS WHO PLACED MORE THAN ONE ORDER.
+SQL> SELECT CUSTOMER_ID, COUNT(*) ORDER_COUNT
+  2  FROM ORDERS
+  3  GROUP BY CUSTOMER_ID
+  4  HAVING COUNT(*) > 1;
+
+CUSTOMER_ID ORDER_COUNT
+----------- -----------
+          3           2
+
+SQL> --4. WAQTD PRODUCTS SOLD MORE THAN 5 QUANTITY.
+SQL> SELECT PRODUCT_ID, SUM(QUANTITY)
+  2  FROM ORDER_ITEMS
+  3  GROUP BY PRODUCT_ID
+  4  HAVING SUM(QUANTITY) > 5;
+
+no rows selected
+
+SQL> --5. WAQTD TOP 3 COSTLIEST PRODUCTS.
+SQL> SELECT *
+  2  FROM (SELECT *
+  3        FROM PRODUCTS
+  4  ORDER BY PRICE DESC)
+  5  WHERE ROWNUM <= 3;
+
+PRODUCT_ID PRODUCT_NAME                                                                                              PRICE CATEGORY_ID
+---------- ---------------------------------------------------------------------------------------------------- ---------- -----------
+         1 Laptop                                                                                                    60000           1
+        10 Induction Stove                                                                                           31000           4
+         3 Android Smartphone                                                                                        28000           1
+
+SQL>

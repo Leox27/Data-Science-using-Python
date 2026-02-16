@@ -1,0 +1,57 @@
+*** ONLINE SHOPPING MANAGEMENT SYSTEM USING ORACLE SQL ***
+
+##1.Introduction
+
+The Online Shopping Management System is a database project developed using Oracle SQL to represent the backend structure of an online shopping platform. The project focuses on storing and managing data related to customers, products, orders, and payments. It helps in understanding real-world database design and SQL operations.
+
+##2.Objective of the Project
+
+The objectives of this project are:
+
+- To design a relational database for an online shopping system.
+- To implement primary key and foreign key relationships.
+- To understand table relationships and normalization.
+- To practice Oracle SQL concepts such as joins, subqueries, group by, having, and order by.
+- To gain hands-on experience with Oracle SQL for academic and interview preparation.
+
+##3.Database Design Overview
+
+The database is designed using the relational model, where each entity of the online shopping system is represented as a table. Data redundancy is minimized through normalization. Relationships between tables are maintained using foreign key constraints to ensure data integrity and consistency.
+
+##4.Description of Tables
+
+- Customers:
+Stores customer details such as customer ID, name, contact information, city, and registration date. Each customer is uniquely identified and can place multiple orders.
+
+- Categories:
+Stores product category information such as category ID and category name. It helps in grouping products for easier management and analysis.
+
+- Products:
+Stores product details including product ID, product name, price, stock quantity, and category ID. Each product belongs to one category.
+
+- Orders:
+Stores order information such as order ID, order date, order status, and customer ID. A customer can place multiple orders.
+
+- Order_Items:
+Stores order-wise product details including order ID, product ID, and quantity. It resolves the many-to-many relationship between orders and products.
+
+- Payments:
+Stores payment details such as payment ID, order ID, payment date, amount, and payment mode. Each order has one corresponding payment.
+
+##5.Entity Relationship
+
+The system follows these relationships:
+One customer can place many orders.
+One order can contain many order items.
+One product can appear in many order items.
+One category can have many products.
+One order is associated with one payment.
+These relationships are implemented using foreign key constraints.
+
+##6.SQL Operations Performed
+
+The project includes various SQL operations to retrieve and manipulate data. Different types of joins are used to combine data from multiple tables. Subqueries are used to filter records based on conditions from other queries. Group by and having clauses are applied for aggregation and filtering grouped data. Order by is used to sort query results. Oracle-specific features such as constraints and ROWNUM are also used.
+
+##7.Conclusion
+
+This project provides a practical understanding of designing and managing a relational database using Oracle SQL. It strengthens core SQL concepts such as table relationships, constraints, joins, and subqueries. The project prepares students for academic evaluations and technical interviews by building a strong foundation in database management systems.

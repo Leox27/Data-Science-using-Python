@@ -1,0 +1,621 @@
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Feb 8 16:45:35 2026
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> conn
+Enter user-name: leo/mayur
+Connected.
+SQL> SET LINES 5000 PAGES 5000
+SQL> CREATE TABLE customers (
+  2      customer_id NUMBER PRIMARY KEY,
+  3      name        VARCHAR2(50) NOT NULL,
+  4      email       VARCHAR2(100) UNIQUE,
+  5      phone       VARCHAR2(15),
+  6      city        VARCHAR2(50)
+  7  );
+
+Table created.
+
+SQL> CREATE TABLE categories (
+  2      category_id   NUMBER PRIMARY KEY,
+  3      category_name VARCHAR2(50) NOT NULL
+  4  );
+
+Table created.
+
+SQL> CREATE TABLE products (
+  2      product_id   NUMBER PRIMARY KEY,
+  3      product_name VARCHAR2(100) NOT NULL,
+  4      price        NUMBER(10,2) CHECK (price > 0),
+  5      category_id  NUMBER,
+  6      CONSTRAINT fk_products_category
+  7          FOREIGN KEY (category_id)
+  8          REFERENCES categories(category_id)
+  9  );
+
+Table created.
+
+SQL> CREATE TABLE orders (
+  2      order_id    NUMBER PRIMARY KEY,
+  3      customer_id NUMBER,
+  4      order_date  DATE DEFAULT SYSDATE,
+  5      status      VARCHAR2(20),
+  6      CONSTRAINT fk_orders_customer
+  7          FOREIGN KEY (customer_id)
+  8          REFERENCES customers(customer_id)
+  9  );
+
+Table created.
+
+SQL> CREATE TABLE order_items (
+  2      order_item_id NUMBER PRIMARY KEY,
+  3      order_id      NUMBER,
+  4      product_id    NUMBER,
+  5      quantity      NUMBER CHECK (quantity > 0),
+  6
+SQL>     CONSTRAINT fk_oi_order
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SQL>         FOREIGN KEY (order_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES orders(order_id),
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL>
+SQL>     CONSTRAINT fk_oi_product
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL>         FOREIGN KEY (product_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES products(product_id)
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> CREATE TABLE order_items (
+  2      order_item_id NUMBER PRIMARY KEY,
+  3      order_id      NUMBER,
+  4      product_id    NUMBER,
+  5      quantity      NUMBER CHECK (quantity > 0),
+  6
+SQL>     CONSTRAINT fk_oi_order
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SQL>         FOREIGN KEY (order_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES orders(order_id),
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL>
+SQL>     CONSTRAINT fk_oi_product
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL>         FOREIGN KEY (product_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES products(product_id)
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> CREATE TABLE order_items (
+  2      order_item_id NUMBER PRIMARY KEY,
+  3      order_id      NUMBER,
+  4      product_id    NUMBER,
+  5      quantity      NUMBER CHECK (quantity > 0),
+  6
+SQL>     CONSTRAINT fk_oi_order
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SQL>         FOREIGN KEY (order_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES orders(order_id),
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL>
+SQL>     CONSTRAINT fk_oi_product
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL>         FOREIGN KEY (product_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES products(product_id)
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SQL> CREATE TABLE order_items (
+  2      order_item_id NUMBER PRIMARY KEY,
+  3      order_id      NUMBER,
+  4      product_id    NUMBER,
+  5      quantity      NUMBER CHECK (quantity > 0),
+  6      CONSTRAINT fk_oi_order FOREIGN KEY (order_id)
+  7          REFERENCES orders(order_id),
+  8      CONSTRAINT fk_oi_product FOREIGN KEY (product_id)
+  9          REFERENCES products(product_id)
+ 10  );
+
+Table created.
+
+SQL> CREATE TABLE payments (
+  2      payment_id   NUMBER PRIMARY KEY,
+  3      order_id     NUMBER UNIQUE,
+  4      payment_date DATE DEFAULT SYSDATE,
+  5      amount       NUMBER(10,2) CHECK (amount > 0),
+  6      payment_mode VARCHAR2(20),
+  7
+SQL>     CONSTRAINT fk_payments_order
+SP2-0734: unknown command beginning "CONSTRAINT..." - rest of line ignored.
+SQL>         FOREIGN KEY (order_id)
+SP2-0734: unknown command beginning "FOREIGN KE..." - rest of line ignored.
+SQL>         REFERENCES orders(order_id)
+SP2-0734: unknown command beginning "REFERENCES..." - rest of line ignored.
+SQL> );
+SP2-0042: unknown command ")" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> CREATE TABLE payments (
+  2      payment_id   NUMBER PRIMARY KEY,
+  3      order_id     NUMBER UNIQUE,
+  4      payment_date DATE DEFAULT SYSDATE,
+  5      amount       NUMBER(10,2) CHECK (amount > 0),
+  6      payment_mode VARCHAR2(20),
+  7      CONSTRAINT fk_payments_order FOREIGN KEY (order_id)
+  8          REFERENCES orders(order_id)
+  9  );
+
+Table created.
+
+SQL> SELECT table_name FROM user_tables;
+
+TABLE_NAME
+------------------------------
+CUSTOMERS
+CATEGORIES
+PRODUCTS
+ORDERS
+ORDER_ITEMS
+PAYMENTS
+
+6 rows selected.
+
+SQL> SELECT constraint_name, constraint_type, table_name
+  2  FROM user_constraints
+  3  WHERE constraint_type IN ('P','R')
+  4  ORDER BY table_name;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+SYS_C007209                    P CATEGORIES
+SYS_C007206                    P CUSTOMERS
+SYS_C007214                    P ORDERS
+FK_ORDERS_CUSTOMER             R ORDERS
+SYS_C007217                    P ORDER_ITEMS
+FK_OI_PRODUCT                  R ORDER_ITEMS
+FK_OI_ORDER                    R ORDER_ITEMS
+SYS_C007221                    P PAYMENTS
+FK_PAYMENTS_ORDER              R PAYMENTS
+FK_PRODUCTS_CATEGORY           R PRODUCTS
+SYS_C007212                    P PRODUCTS
+
+11 rows selected.
+
+SQL> CREATE SEQUENCE seq_customers START WITH 1 INCREMENT BY 1;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_customers
+  2  BEFORE INSERT ON customers
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.customer_id := seq_customers.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> CREATE SEQUENCE seq_categories START WITH 1;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_categories
+  2  BEFORE INSERT ON categories
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.category_id := seq_categories.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> CREATE SEQUENCE seq_products START WITH 1;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_products
+  2  BEFORE INSERT ON products
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.product_id := seq_products.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> CREATE SEQUENCE seq_orders START WITH 1001;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_orders
+  2  BEFORE INSERT ON orders
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.order_id := seq_orders.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> CREATE SEQUENCE seq_order_items START WITH 1;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_order_items
+  2  BEFORE INSERT ON order_items
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.order_item_id := seq_order_items.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> CREATE SEQUENCE seq_payments START WITH 1;
+
+Sequence created.
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_payments
+  2  BEFORE INSERT ON payments
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.payment_id := seq_payments.NEXTVAL;
+  6  END;
+  7  /
+
+Trigger created.
+
+SQL> INSERT INTO customers (name, email, phone, city)
+  2  VALUES ('Amit', 'amit@gmail.com', '9876543210', 'Hyderabad');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO customers (name, email, phone, city)
+  2  VALUES ('Riya', 'riya@gmail.com', '9123456780', 'Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO categories (category_name) VALUES ('Electronics');
+
+1 row created.
+
+SQL> INSERT INTO categories (category_name) VALUES ('Clothing');
+
+1 row created.
+
+SQL> INSERT INTO products (product_name, price, category_id)
+  2  VALUES ('Laptop', 60000, 1);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO products (product_name, price, category_id)
+  2  VALUES ('T-Shirt', 1200, 2);
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id, status)
+  2  VALUES (1, 'PLACED');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO orders (customer_id, status)
+  2  VALUES (2, 'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO order_items (order_id, product_id, quantity)
+  2  VALUES (1001, 1, 1);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO order_items (order_id, product_id, quantity)
+  2  VALUES (1002, 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO payments (order_id, amount, payment_mode)
+  2  VALUES (1001, 60000, 'CARD');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO payments (order_id, amount, payment_mode)
+  2  VALUES (1002, 2400, 'UPI');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Aditya Kulkarni','aditya.k@gmail.com','810000001','Pune');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Bhavana Rao','bhavana.r@gmail.com','810000002','Mysore');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Chirag Shah','chirag.s@gmail.com','810000003','Surat');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Diksha More','diksha.m@gmail.com','810000004','Kolhapur');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Eshan Banerjee','eshan.b@gmail.com','810000005','Howrah');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Farhan Ali','farhan.a@gmail.com','810000006','Aligarh');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Gauri Deshpande','gauri.d@gmail.com','810000007','Satara');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Himanshu Tiwari','himanshu.t@gmail.com','810000008','Rewa');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Ishita Sengupta','ishita.s@gmail.com','810000009','Durgapur');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Jayant Pawar','jayant.p@gmail.com','810000010','Solapur');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Kritika Arora','kritika.a@gmail.com','810000011','Panipat');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Lakshay Bansal','lakshay.b@gmail.com','810000012','Sirsa');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Mohit Rawat','mohit.r@gmail.com','810000013','Haldwani');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Nandini Kulkarni','nandini.k@gmail.com','810000014','Ratnagiri');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Omkar Joshi','omkar.j@gmail.com','810000015','Alibaug');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Pranav Kulkarni','pranav.k@gmail.com','810000016','Baramati');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Quazi Rahman','quazi.r@gmail.com','810000017','Murshidabad');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Rachana Patil','rachana.p@gmail.com','810000018','Jalgaon');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Sanket Jadhav','sanket.j@gmail.com','810000019','Latur');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Tanmay Kulkarni','tanmay.k@gmail.com','810000020','Sangli');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Utkarsh Mishra','utkarsh.m@gmail.com','810000021','Prayagraj');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Vaishali Patankar','vaishali.p@gmail.com','810000022','Chiplun');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Wasim Khan','wasim.k@gmail.com','810000023','Malegaon');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Xavier Dsouza','xavier.d@gmail.com','810000024','Vasai');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Yashwant Solanki','yashwant.s@gmail.com','810000025','Ujjain');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Zoya Siddiqui','zoya.s@gmail.com','810000026','Rampur');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Aarav Mehra','aarav.m@gmail.com','810000027','Rohtak');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Bhuvan Malhotra','bhuvan.m@gmail.com','810000028','Sonipat');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Charu Negi','charu.n@gmail.com','810000029','Tehri');
+
+1 row created.
+
+SQL> INSERT INTO customers (name,email,phone,city) VALUES ('Devansh Tripathi','devansh.t@gmail.com','810000030','Faizabad');
+
+1 row created.
+
+SQL> INSERT INTO categories (category_name) VALUES ('Mobiles & Gadgets');
+Enter value for gadgets: INSERT INTO categories (category_name) VALUES ('Men Wear');
+old   1: INSERT INTO categories (category_name) VALUES ('Mobiles & Gadgets')
+new   1: INSERT INTO categories (category_name) VALUES ('Mobiles INSERT INTO categories (category_name) VALUES ('Men Wear');')
+INSERT INTO categories (category_name) VALUES ('Mobiles INSERT INTO categories (category_name) VALUES ('Men Wear');')
+                                                                                                        *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> INSERT INTO categories (category_name) VALUES ('Women Wear');
+
+1 row created.
+
+SQL> INSERT INTO categories (category_name) VALUES ('Kitchen Utilities');
+
+1 row created.
+
+SQL> INSERT INTO categories (category_name) VALUES ('Academic Books');
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Android Smartphone',28000,1);
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Bluetooth Speaker',4500,1);
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Smart Fitness Band',6500,1);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Formal Shirt',2200,2);
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Cotton Trousers',2600,2);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Kurti Set',3400,3);
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Women Jacket',4800,3);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Induction Stove',31000,4);
+
+1 row created.
+
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Mixer Grinder',7200,4);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO products (product_name,price,category_id) VALUES ('Database Systems Book',950,5);
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (3,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (7,'PLACED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (12,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (18,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (25,'PLACED');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO orders (customer_id,status) VALUES (3,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (10,'CANCELLED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (20,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (28,'PLACED');
+
+1 row created.
+
+SQL> INSERT INTO orders (customer_id,status) VALUES (30,'DELIVERED');
+
+1 row created.
+
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1006,1,1);
+
+1 row created.
+
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1006,3,1);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1007,4,2);
+
+1 row created.
+
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1008,6,1);
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1009,9,1);
+
+1 row created.
+
+SQL> INSERT INTO order_items (order_id,product_id,quantity) VALUES (1010,10,2);
+
+1 row created.
+
+SQL> INSERT INTO payments (order_id,amount,payment_mode) VALUES (1006,34500,'CARD');
+
+1 row created.
+
+SQL> INSERT INTO payments (order_id,amount,payment_mode) VALUES (1008,3400,'UPI');
+
+1 row created.
+
+SQL> INSERT INTO payments (order_id,amount,payment_mode) VALUES (1009,7200,'NETBANKING');
+
+1 row created.
+
+SQL> INSERT INTO payments (order_id,amount,payment_mode) VALUES (1010,1900,'CARD');
+
+1 row created.
+
+SQL>COMMIT;
+
+Commit complete.
